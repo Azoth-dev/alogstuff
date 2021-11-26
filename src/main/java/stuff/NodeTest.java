@@ -1,0 +1,5 @@
+package stuff;
+
+class NodeTest {
+
+}
