@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BinaryTreeBFS {
     public static void main(String[] args) {
         Node<Integer> integerNode= new Node<>(1);
-        System.out.println(integerNode);
         log.info("Testing log"+integerNode);
-        Node<Integer> sss=null;
 
     }
 
@@ -27,7 +25,6 @@ class Node<E>{
 
     public Node(E element) {
         this.element = element;
-        log.info("aaa");
     }
 
     public void setLeft(Node<E> left) {
@@ -40,7 +37,6 @@ class Node<E>{
 
     @Override
     public String toString() {
-
 
         return "Node{" +
                 "element value=" + element +
