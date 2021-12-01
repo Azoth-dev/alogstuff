@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BSTFindInOrderSuccessorTest {
@@ -66,20 +69,43 @@ class BSTFindInOrderSuccessorTest {
     }
 
 
-    public static String pathTo(Node root, int val, String out){
-        if(root!=null && root.getVal()==val){
-            return out+root.getVal();
+    public static void pathDFS(Node node){
+        if(node==null){
+            return;
         }
-        if(root.getLeft()!=null)
-            return pathTo(root.getLeft(),val,out+root.getLeft().getVal());
-        if(root.getRight()!=null)
-            return pathTo(root.getRight(),val,out+root.getRight().getVal());
-
-        return out;
+        pathDFS(node.getLeft());
+        pathDFS(node.getRight());
+        System.out.println(node.getVal());
     }
+
+
+    public static String pathBFS(Node node, int val){
+        Queue<Node> queue= new LinkedList<>();
+        StringBuilder stringBuilder= new StringBuilder("");
+        queue.add(node);
+
+        while (!queue.isEmpty()){
+            Node poll = queue.poll();
+            stringBuilder.append(poll.getVal()+",");
+
+            if(poll.getVal()==val){
+                break;
+            }
+
+            if(poll.getRight()!=null )
+                queue.offer(poll.getRight());
+            if(poll.getLeft()!=null)
+                queue.offer(poll.getLeft());
+        }
+        return stringBuilder.toString();
+    }
+
 
     @Test
     public void test2(){
-        assertEquals(pathTo(parent,11,""),"323232");
+
+        String startPath = pathBFS(parent, 11);
+        String endPath = pathBFS(parent, 25);
+        assertEquals(startPath,endPath);
     }
 }
